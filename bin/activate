@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/mnt/c/Users/justi/Documents/Spotify Application/track-match/track-match"
+VIRTUAL_ENV="/mnt/c/Users/justi/Documents/Spotify Application/track-match"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

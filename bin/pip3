@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/mnt/c/Users/justi/Documents/Spotify Application/track-match/track-match/bin/python3" "$0" "$@"
+'''exec' "/mnt/c/Users/justi/Documents/Spotify Application/track-match/bin/python3" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

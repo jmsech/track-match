@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/mnt/c/Users/justi/Documents/Spotify Application/track-match/track-match"
+set -gx VIRTUAL_ENV "/mnt/c/Users/justi/Documents/Spotify Application/track-match"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
