@@ -1,0 +1,39 @@
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<h2 style="text-align: right;"><a href="/sign_out">[sign out]<a/></h2>
+<div class="row">
+    <div class="column">
+        <center>
+            <h2> You have {{ data[3] }} songs in common with Justin: </h2>
+            <p>(click the Spotify logo to open in Spotify and save to you library) </p>
+            <iframe src="https://open.spotify.com/embed/playlist/{{ data[2] }}" width="500" height="580" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </center>
+    </div>
+    <div class="column">
+        <center>
+            <h2>You and Justin have been listing to {{ data[1] }} of the same artists recently:</h2>
+            {% for item in data[0] %}
+                <p> {{ item }} </p>
+            {% endfor %}
+        </center>
+    </div>
+</div>

@@ -4,7 +4,7 @@ Prerequisites
     // from your [app settings](https://developer.spotify.com/dashboard/applications)
     export SPOTIPY_CLIENT_ID=client_id_here
     export SPOTIPY_CLIENT_SECRET=client_secret_here
-    export SPOTIPY_REDIRECT_URI='http://127.0.0.1:8080' // must contain a port
+    export SPOTIPY_REDIRECT_URI='http://127.0.0.1:5000' // must contain a port
     // SPOTIPY_REDIRECT_URI must be added to your [app settings](https://developer.spotify.com/dashboard/applications)
     OPTIONAL
     // in development environment for debug output
@@ -63,8 +63,9 @@ def index():
                f'</center>'
 
     # Step 4. Signed in, display data
-    # return common_tracks()
-    return top_artists()
+    playlist_id, num_tracks = common_tracks()
+    common_artists =  top_artists()
+    return render_template("common_tracks_and_artists.html", data=[common_artists, len(common_artists), playlist_id, num_tracks])
 
 @app.route('/sign_out')
 def sign_out():
@@ -98,14 +99,7 @@ def common_tracks():
     for i in range(0, len(common_tracks), 100):
         sp_jsech.user_playlist_add_tracks(user='j.sech',playlist_id=playlist['uri'], tracks=list(common_tracks)[i:i+100])
 
-    return f'<center> '\
-               f'<h2> You have {len(common_tracks)} songs in common with Justin: </h2>'\
-               f'<p>(click the Spotify logo to open in Spotify and save to you library) </p>' \
-               f'<iframe src="https://open.spotify.com/embed/playlist/{playlist["id"]}" width="500" height="580" frameborder="0" ' \
-               f'allowtransparency="true" allow="encrypted-media"></iframe> '\
-               f'<h2><a href="/sign_out">[sign out]<a/></h2>' \
-           f'</center>' \
-
+    return playlist['id'], len(common_tracks)
 
 def top_tracks():
     # Fetch Justin's library each time
@@ -175,7 +169,7 @@ def top_artists():
 
     common_top = user_top.intersection(jsech_top)
 
-    return render_template("list_template.html", data=[common_top, len(common_top)])
+    return common_top
 
 
 
