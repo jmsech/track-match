@@ -161,15 +161,19 @@ def top_artists():
     jsech_top = set()
     user_top = set()
 
-    for item in sp_jsech.current_user_top_artists(50)['items']:
-        jsech_top.add(item['name'])
+    for artist in sp_jsech.current_user_top_artists(50)['items']:
+        jsech_top.add((artist['id'], artist['name']))
 
-    for item in sp.current_user_top_artists(50)['items']:
-        user_top.add(item['name'])
+    for artist in sp.current_user_top_artists(50)['items']:
+        user_top.add((artist['id'], artist['name']))
 
-    common_top = user_top.intersection(jsech_top)
 
-    return common_top
+    common_artists = list(user_top.intersection(jsech_top))
+
+    # sort alphabetically by artist name
+    common_artists.sort(key=lambda x: x[1])
+
+    return common_artists
 
 
 
