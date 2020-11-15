@@ -67,7 +67,7 @@ def index():
     common_artists =  top_artists()
     return render_template("common_tracks_and_artists.html", data=[common_artists, len(common_artists), playlist_id, num_tracks])
 
-@app.route('/sign_out')
+@app.route('/sign_out/')
 def sign_out():
     try:
         # Remove the CACHE file (.cache-test) so that a new user can authorize.
@@ -91,11 +91,11 @@ def common_tracks():
 
     sp = spotipy.Spotify(auth_manager=auth_manager)
     tracks = get_library(sp)
-    user_id = sp.current_user()['id']
+    user_name = sp.current_user()['display_name']
 
     common_tracks = tracks.intersection(jsechs_tracks)
 
-    playlist = sp_jsech.user_playlist_create(user='j.sech' ,name=f'Common Tracks -  {user_id} & j.sech')
+    playlist = sp_jsech.user_playlist_create(user='j.sech' ,name=f"{user_name} & j.sech 's Common Tracks")
     for i in range(0, len(common_tracks), 100):
         sp_jsech.user_playlist_add_tracks(user='j.sech',playlist_id=playlist['uri'], tracks=list(common_tracks)[i:i+100])
 
