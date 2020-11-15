@@ -36,6 +36,12 @@ caches_folder = './.spotify_caches/'
 if not os.path.exists(caches_folder):
     os.makedirs(caches_folder)
 
+access_token =  os.environ["JSECH_ACCESS_TOKEN"]
+refresh_token = os.environ["JSECH_REFRESH_TOKEN"]
+with open(caches_folder + "jsech_token", 'w') as f:
+    f.write( '{"access_token": "' + access_token + '", "token_type": "Bearer", "expires_in": 3600, "scope": "playlist-modify-public user-library-read user-top-read", "expires_at": 1605403372, "refresh_token": "'+ refresh_token + '"}')
+
+
 
 def session_cache_path():
     return caches_folder + session.get('uuid')
@@ -49,12 +55,6 @@ def index():
     auth_manager = spotipy.oauth2.SpotifyOAuth(scope='user-top-read user-library-read',
                                                 cache_path=session_cache_path(),
                                                 show_dialog=True)
-
-    access_token =  os.environ["JSECH_ACCESS_TOKEN"]
-    refresh_token = os.environ["JSECH_REFRESH_TOKEN"]
-    with open(caches_folder + "jsech_token", 'w') as f:
-        f.write( '{"access_token": "' + access_token + '", "token_type": "Bearer", "expires_in": 3600, "scope": "playlist-modify-public user-library-read user-top-read", "expires_at": 1605403372, "refresh_token": "'+ refresh_token + '"}')
-
 
     if request.args.get("code"):
         # Step 3. Being redirected from Spotify auth page
