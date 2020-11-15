@@ -195,8 +195,8 @@ def get_library(sp):
         library += results['items']
 
     # save full library
-    with open(f'data/{sp.me()["display_name"]}_liked_songs.json', 'w') as f:
-        json.dump(library, f)
+    # with open(f'data/{sp.me()["display_name"]}_liked_songs.json', 'w') as f:
+    #     json.dump(library, f)
 
     tracks = set()
     for item in library:
